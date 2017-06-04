@@ -1,4 +1,4 @@
-<!-- This is the corresponding "starter code" for 07_Markers/Infowindows in Udacity and Google's Maps
+<!-- This is the corresponding "starter code" for 04_Hello Map in Udacity and Google's Maps
 API Course, Lesson 1 -->
 <html>
  <head>
@@ -9,32 +9,38 @@ API Course, Lesson 1 -->
    </style>
  </head>
  <body>
+   <!-- TODO 1: Create a place to put the map in the HTML-->
    <div id="map"></div>
-   <script type="text/javascript">
-     // Create a map variable
+   <script>
+     // TODO: Create a map variable
      var map;
-     // Function to initialize the map within the map div
+
+     // TODO: Complete the following function to initialize the map
      function initMap() {
+       // TODO: use a constructor to create a new map JS object. You can use the coordinates
+       // we used, 40.7413549, -73.99802439999996 or your own!
        map = new google.maps.Map(document.getElementById('map'), {
-         center: {lat: 40.74135, lng: -73.99802},
-         zoom: 14
+        center: {lat: 40.7413549, lng: -73.99802439999996},
+        zoom: 13
        });
-       // Create a single latLng literal object.
-       var singleLatLng = {lat: 40.74135, lng: -73.99802};
-       // TODO: Create a single marker appearing on initialize -
-       // Create it with the position of the singleLatLng,
-       // on the map, and give it your own title!
-
-       // TODO: create a single infowindow, with your own content.
-       // It must appear on the marker
-
-       // TODO: create an EVENT LISTENER so that the infowindow opens when
-       // the marker is clicked!
+       var tribeca = {lat: 40.719526, lng: -74.0089934};
+       var marker = new google.maps.Marker({
+        position: tribeca,
+        map: map,
+        title: 'First Marker'
+       });
+       var infowindow = new google.maps.InfoWindow({
+        content: 'Do you ever feel like an infowindow, floating through the wind' + 'ready to start again?'
+       });
+       marker.addListener('click', function() {
+        infowindow.open(map, marker);
+       });
      }
    </script>
    <!--TODO: Insert your API Key in the below call to load the API.-->
-   <script async defer
-     src="https://maps.googleapis.com/maps/api/js?v=3&key=XXX&callback=initMap">
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoeth7Fqpz2HH124UjZkfxLSS19YhOT5Y&callback=initMap"
+   async defer>
    </script>
+ </body>
  </body>
 </html>
